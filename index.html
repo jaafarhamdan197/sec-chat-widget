@@ -1,22 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>n8n Chat</title>
+  <title>Custom n8n Chat</title>
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
   <style>
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    #n8n-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      z-index: 9999;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      border-radius: 12px;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
+  <div id="n8n-chat"></div>
+
   <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
     createChat({
-      webhookUrl: 'https://jhamdan.app.n8n.cloud/webhook/55b51dc7-3016-473b-8352-8f6ac3d60e0f/chat'
+      webhookUrl: 'https://jhamdan.app.n8n.cloud/webhook/55b51dc7-3016-473b-8352-8f6ac3d60e0f/chat',
+      target: '#n8n-chat',
+      mode: 'window',
+      chatInputKey: 'chatInput',
+      chatSessionKey: 'sessionId',
+      showWelcomeScreen: false,
+      defaultLanguage: 'en',
+      initialMessages: [
+        '👋 Welcome! Need help with something?',
+        'Ask me anything and I’ll try my best to help.'
+      ],
+      i18n: {
+        en: {
+          title: '💬 Ask Nathan',
+          subtitle: 'Your AI assistant is online now.',
+          getStarted: 'Start Chat',
+          inputPlaceholder: 'Type your question...',
+        },
+      }
     });
   </script>
 </body>
