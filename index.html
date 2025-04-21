@@ -1,69 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>SEC Chat - SECIntel</title>
-  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-    }
+<!-- Chat Widget Configuration -->
 
-    #n8n-chat {
-      display: none; /* Initially hidden to avoid showing a blank box */
-    }
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+	// Inject CSS variables dynamically
+	const css = `
+		:root {
+			--chat--color-primary: #E08914;
+			--chat--color-primary-shade-50: #E08914;
+			--chat--color-primary-shade-100: #E08914;
+			--chat--color-secondary: #ffffff;
+			--chat--color-secondary-shade-50: #ffffff;
+			--chat--color-white: #ffffff;
+			--chat--color-light: #f2f4f8;
+			--chat--color-light-shade-50: #ffffff;
+			--chat--color-light-shade-100: #E08914;
+			--chat--color-medium: #E08914;
+			--chat--color-dark: #E08914;
+			--chat--color-disabled: #E08914;
+			--chat--color-typing: #404040;
+			--chat--spacing: 1rem;
+			--chat--border-radius: 0.25rem;
+			--chat--transition-duration: 0.15s;
+			--chat--window--width: 400px;
+			--chat--window--height: 600px;
+			--chat--header-height: auto;
+			--chat--header--padding: var(--chat--spacing);
+			--chat--header--background: var(--chat--color-dark);
+			--chat--header--color: var(--chat--color-light);
+			--chat--header--border-top: none;
+			--chat--header--border-bottom: none;
+			--chat--heading--font-size: 1.2em;
+			--chat--subtitle--font-size: inherit;
+			--chat--subtitle--line-height: 1.2;
+			--chat--textarea--height: 50px;
+			--chat--message--font-size: 1rem;
+			--chat--message--padding: var(--chat--spacing);
+			--chat--message--border-radius: var(--chat--border-radius);
+			--chat--message-line-height: 1.4;
+			--chat--message--bot--background: var(--chat--color-white);
+			--chat--message--bot--color: var(--chat--color-dark);
+			--chat--message--bot--border: none;
+			--chat--message--user--background: var(--chat--color-secondary);
+			--chat--message--user--color: var(--chat--color-white);
+			--chat--message--user--border: none;
+			--chat--message--pre--background: rgba(0, 0, 0, 0.05);
+			--chat--toggle--background: var(--chat--color-primary);
+			--chat--toggle--hover--background: var(--chat--color-primary-shade-50);
+			--chat--toggle--active--background: var(--chat--color-primary-shade-100);
+			--chat--toggle--color: var(--chat--color-white);
+			--chat--toggle--size: 50px;
 
-    .n8n-chat-header {
-      background-color: #E08914; /* SEC-style dark navy */
-      color: #ffffff;
-    }
+			/* Custom Accent Color */
+			--chat--color-accent: #56C2F4;
+		}
+	`;
 
-    .n8n-chat-bubble.bot {
-      background-color: #E08914;
-      color: white;
-    }
+	const style = document.createElement('style');
+	style.textContent = css;
+	document.head.appendChild(style);
 
-    .n8n-chat-bubble.user {
-      background-color: #E08914;
-      color: black;
-    }
-  </style>
-</head>
-<body>
-  <div id="n8n-chat"></div>
+	// Load and start the chat widget
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-  <script type="module">
-    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+	createChat({
+		webhookUrl: 'https://jhamdan.app.n8n.cloud/webhook/fd018b62-20d2-49c3-8081-d7e13f801c86/chat'
+	});
 
-    createChat({
-      webhookUrl: 'https://jhamdan.app.n8n.cloud/webhook/55b51dc7-3016-473b-8352-8f6ac3d60e0f/chat',
-      target: '#n8n-chat',
-      mode: 'window',
-      chatInputKey: 'chatInput',
-      chatSessionKey: 'sessionId',
-      showWelcomeScreen: false,
-      defaultLanguage: 'en',
-      initialMessages: [
-        "👋 Hi! I'm SECIntel — your dedicated data analysis support bot at SEC.",
-        "Feel free to ask me anything about your dashboards, data, or reports."
-      ],
-      i18n: {
-        en: {
-          title: 'SECIntel – SEC Data Assistant',
-          subtitle: "Your 24/7 analysis partner.",
-          getStarted: 'Start Chat',
-          inputPlaceholder: 'Type your question...',
-        },
-      },
-    });
+	createChat({
+		webhookUrl: 'https://jhamdan.app.n8n.cloud/webhook/55b51dc7-3016-473b-8352-8f6ac3d60e0f/chat',
+		webhookConfig: {
+			method: 'POST',
+			headers: {}
+		},
+		target: '#n8n-chat',
+		mode: 'window',
+		chatInputKey: 'chatInput',
+		chatSessionKey: 'sessionId',
+		metadata: {},
+		showWelcomeScreen: false,
+		defaultLanguage: 'en',
+		initialMessages: [
+			'Are you dealing with any skin problems?'
+		],
+		i18n: {
+			en: {
+				title: '👋 Hi! I'm SECIntel — your dedicated data analysis support bot at SEC.',
+				subtitle: "Feel free to ask me anything about your dashboards, data, or reports.",
+				footer: '',
+				getStarted: 'New Conversation',
+				inputPlaceholder: 'Type your question..',
+			},
+		},
+	});
+</script>
 
-    // Reveal the div once chat is loaded
-    window.addEventListener("DOMContentLoaded", () => {
-      document.querySelector('#n8n-chat').style.display = 'block';
-    });
-  </script>
-</body>
-</html>
+    
+<!-- Chat Widget Script -->
